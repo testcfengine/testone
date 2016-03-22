@@ -1,0 +1,38 @@
+#body common control
+#{
+#	bundlesequence => { "html_page" };
+#	inputs => { "$(sys.libdir)/stdlib.cf" };
+#}
+
+bundle agent html_page
+{
+        vars:
+		"html_page_url" string => "/var/www/html/index.html";
+	files:
+		"$(html_page_url)"
+		perms => mog("644", "root", "root"),
+		comment => "Variables + HTML",
+		create => "true",
+		edit_line => html_content;
+}
+
+bundle edit_line html_content
+{
+	insert_lines:
+		"
+		<html>	
+		<br>
+		Nombre de coeurs CPU : $(sys.cpus) </br>
+		Date : $(sys.date) </br>
+		Domaine : $(sys.domain) </br>
+		Nom de l'hôte : $(sys.fqhost) </br>
+		OS : $(sys.os) </br>
+		Nom complet de l'os : $(sys.ostype) </br>
+		Uptime : $(sys.uptime) </br>  
+		Liste des adresses IP :$(sys.ip_addresses)</br>
+		Workdir : $(sys.workdir) </br>
+		Hote sys.host : $(sys.host) </br>
+		</br>
+		</html>
+		";
+}

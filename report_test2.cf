@@ -1,0 +1,33 @@
+body common control
+{
+	bundlesequence => { "report_test2" };
+}
+
+bundle agent report_test2
+{
+	vars:
+		"software" slist => { "cf-serverd", "cf_monitord" };
+
+	classes:
+		"no_report"        expression => fileexists("/home/steph/report_test2.html");
+		"have_$(software)" expression => fileexists("/usr/bin/$(software)");
+
+	reports:
+		cfengine_3::
+	      		"
+      			<html>
+      			Name of the host: $(sys.host)<br>
+      			System of the host: $(sys.os)<br>
+      			"
+         		report_to_file => "/home/steph/report_test2.html";
+			"
+      			Host has software $(software)<br>
+      			"
+
+        		ifvarclass     => "have_$(software)",
+        		report_to_file => "/home/steph/report_test2.html";
+			"
+      			</html>
+      			"
+         		report_to_file => "/home/steph/report_test2.html";
+}

@@ -1,0 +1,28 @@
+bundle agent create_edit
+{
+	vars:
+		"directorytest" string => "/home/steph/";
+		"filetest" string => "/home/steph/test.txt";
+	files:
+		"$(directorytest)"
+		create => "true";
+
+	reports:
+		cfengine::
+			"Directory : $(directorytest)	[OK]";
+
+	files:
+		"$(filetest)"
+		create => "true",
+		edit_line => addmessage;
+	
+	reports:
+		 cfengine::
+			"File : $(filetest) 		[OK]";                
+}
+
+bundle edit_line addmessage
+{
+	insert_lines:
+		"This line has been written with create_edit_file bundle";
+}
