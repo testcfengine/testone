@@ -20,7 +20,7 @@ bundle edit_line html_content
 	insert_lines:
 		"
 		<html>	
-		<br>
+		</br>
 		Nombre de coeurs CPU : $(sys.cpus) </br>
 		Date : $(sys.date) </br>
 		Domaine : $(sys.domain) </br>
