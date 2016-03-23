@@ -21,7 +21,7 @@ bundle edit_line html_content
 		"
 		<html>	
 		</br>
-		#Nombre de coeurs CPU : $(sys.cpus) </br>
+		Nombre de coeurs CPU : $(sys.cpus) </br>
 		Date : $(sys.date) </br>
 		Domaine : $(sys.domain) </br>
 		Nom de l'hôte : $(sys.fqhost) </br>
