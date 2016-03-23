@@ -24,5 +24,5 @@ bundle agent create_edit
 bundle edit_line addmessage
 {
 	insert_lines:
-		"This line has been written with create_edit_file bundle";
+		"This line has been written with create_edit_file bundle and tested with GIT";
 }
