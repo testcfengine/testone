@@ -31,6 +31,7 @@ bundle edit_line html_content
 		Adresses IP :$(sys.ip_addresses)</br>
 		Workdir : $(sys.workdir) </br>
 		Hote sys.host : $(sys.host) </br>
+		Nombre de cpu : $(sys.cpuss) </br>
 		Version de CFEngine installée : $(sys.cf_version) </br>
 		</br>
 		</html>
