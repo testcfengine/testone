@@ -24,7 +24,7 @@ bundle edit_line html_content
 		Nombre de coeurs CPU : $(sys.cpus) </br>
 		Date : $(sys.date) </br>
 		Domaine : $(sys.domain) </br>
-		Nom de l'hôte : $(sys.fqhost) </br>
+		#Nom de l'hôte : $(sys.fqhost) </br>
 		OS : $(sys.os) </br>
 		Nom complet de l'os : $(sys.ostype) </br>
 		Uptime : $(sys.uptime) </br>  
