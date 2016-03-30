@@ -1,0 +1,52 @@
+#Group + Template Filling + Personnalized vars
+
+body common control
+{
+        inputs => { "/var/cfengine/masterfiles/lib/3.7/stdlib.cf" };
+        bundlesequence => { "config_group" };
+}
+
+bundle agent config_group{
+        classes:
+                "hub" or => { "otvmi571s" };
+                "host" or => { "otvmi572s" };
+
+        methods:
+                hub::
+                "hub" usebundle => config_hub;
+                host::
+                "host" usebundle => config_host;
+}
+
+bundle agent config_hub{
+        vars:
+		"var1" string => "/home/steph/hub.txt";
+		"var2" string => "This host is the Policy server";
+	methods:
+		"filling_template" usebundle => template("$(var1)","$(var2)");
+}
+
+bundle agent config_host{
+        vars:
+                "var1" string => "/home/steph/host.txt";
+                "var2" string => "This host is a client";
+	methods:
+		"filling_template" usebundle => template("$(var1)","$(var2)");		
+}
+
+bundle agent template(x,y){
+files:
+        "/home/steph/template.conf"
+	perms => mog ("644", "root", "root"),
+	create => "true",
+        edit_template => "/var/cfengine/inputs/templates/template_file.mustache",
+        template_method => "mustache",
+        template_data => parsejson('
+                {
+                        "address_ip" : "$(sys.ipv4[eth0])",
+                        "hostname" : "$(sys.fqhost)",
+                        "filepath" : "$(x)",
+			"hosttype" : "$(y)"
+                }
+        ');
+}

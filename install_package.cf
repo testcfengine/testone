@@ -1,0 +1,14 @@
+#Package install
+body common control {
+	version => "1.0";
+	inputs => { "/var/cfengine/inputs/lib/3.7/stdlib.cf" };
+	bundlesequence => { "manage_packages" };
+}
+
+bundle agent manage_packages {
+
+packages:
+	"nano"
+	package_policy => "add",
+	package_method => yum_rpm;
+}

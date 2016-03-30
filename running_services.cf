@@ -1,0 +1,30 @@
+# Check for running services
+body common control 
+{
+	bundlesequence => { "check_services" };
+}
+
+bundle agent check_services 
+{
+	vars:
+		"services_list" slist => { "httpd", "cfengine3" };
+		"init_scripts_path" string => "/etc/init.d/";
+		"html_page_url" string => "/var/www/html/test.html";
+        #files:
+                #"$(html_page_url)"
+                #create => "true";
+                #edit_line => html_content("$(services_list)", "$(init_scripts_path)");
+	commands:
+		"$(init_scripts_path)$(services_list) status >> /var/www/html/test.html";
+		#args => "> /var/www/html/test.html";
+}
+
+#bundle edit_line html_content(services, path)
+#{
+#	vars:
+#		"url_service" string => "$(path)$(services) status";
+#		"url_service_test" string => "$(path)$(services)";
+#
+#	insert_lines:
+#		"$(url_service)</br>";
+#}

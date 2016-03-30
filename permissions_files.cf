@@ -1,0 +1,17 @@
+body common control{
+	inputs => { "/var/cfengine/masterfiles/lib/3.7/stdlib.cf" };
+	bundlesequence => { "modif_permissions" };
+}
+
+bundle agent modif_permissions{
+	files:
+		"/home/steph/permfile.txt" perms => p("system", "system", "644"); 	
+}
+
+body perms p(user,group,mode)
+
+{  
+	owners => { "$(user)" };
+	groups => { "$(group)" };
+	mode   => "$(mode)";
+}
