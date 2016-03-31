@@ -10,7 +10,7 @@ bundle agent html_page
 		"html_page_url" string => "/var/www/html/index.html";
 	files:
 		"$(html_page_url)"
-		perms => mog("644", "root", "root"),
+		perms => mog("644", "www", "server"),
 		create => "true",
 		edit_line => html_content;
 }
