@@ -8,5 +8,5 @@ bundle agent report_test
 	reports:
 		cfengine_3::
 			"TimeStamp : $(sys.date)"
-			report_to_file => "/home/steph/report_teest.log";
+			report_to_file => "/home/steph/repoort_test.log";
 }
