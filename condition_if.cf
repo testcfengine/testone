@@ -1,0 +1,20 @@
+#Condition test (ifelse)
+
+body common control{
+	bundlesequence => { "condition"};
+}
+
+bundle agent condition{
+	vars:
+		"lastname" string => ifelse("toto", "toto1",
+					"tata", "tata1",
+					"unknow");
+
+	methods:
+		"condition" usebundle => confirmed("$(lastname)");
+}
+
+bundle agent confirmed(x){
+	reports:
+		"Lastname is $(x)";
+}

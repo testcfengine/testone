@@ -1,0 +1,61 @@
+# Test : Groups + Common vars
+body common control
+{
+	inputs => { "/var/cfengine/masterfiles/lib/3.7/stdlib.cf","/var/cfengine/inputs/mypromises/groups.cf" }; 
+	bundlesequence => { "config_group" };
+}
+
+#bundle agent config_group{
+ #       classes:
+  #              "hub" or => { "otvmi571s" };
+   #             "host" or => { "otvmi572s" };
+    #            "both" or => { "otvmi571s", "otvmi572s" };
+#
+ #       methods:
+  #              hub::
+   #             "hub" usebundle => config_hub;
+    #            host::
+     #           "host" usebundle => config_host;
+      #          both::
+       #         "both" usebundle => config_both;
+#}
+
+bundle agent config_hub{
+        vars:
+                "testpagehub" string => "/home/steph/hub.txt";
+                "autovar" string => "This host is in class hub";
+        files:
+                "$(testpagehub)"
+                perms => mog("644", "root", "root"),
+                create => "true",
+                edit_line => content( "$(autovar)" );
+}
+               
+bundle agent config_host{
+        vars:
+		"testpagehost" string => "/home/steph/host.txt";
+                "autovar" string => "This host is in class host";
+        files:
+                "$(testpagehost)"
+                perms => mog("644", "root", "root"),
+                create => "true",
+                edit_line => content( "$(autovar)" );
+}
+
+bundle agent config_both{
+        vars:
+                "testpageboth" string => "/home/steph/both.txt";
+                "autovar" string => "This host is in class both";
+        files:
+                "$(testpageboth)"
+                perms => mog("644", "root", "root"),
+                create => "true",
+                edit_line => content( "$(autovar)" );
+}
+
+bundle edit_line content(var){
+	insert_lines:
+		"$(var)";
+	reports:
+		"$(var)";
+}
