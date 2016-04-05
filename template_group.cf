@@ -39,7 +39,7 @@ files:
         "/home/steph/template.conf"
 	perms => mog ("644", "root", "root"),
 	create => "true",
-        edit_template => "/var/cfengine/inputs/templates/template_file.mustache",
+        edit_template => "/var/cfengine/inputs/templates/template_file.conf",
         template_method => "mustache",
         template_data => parsejson('
                 {

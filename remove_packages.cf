@@ -11,6 +11,6 @@ bundle agent manage_packages {
 packages:
 	"nano"
 	#policy => "present",
-	package_policy => "add",
+	package_policy => "delete",
 	package_method => yum_rpm;
 }

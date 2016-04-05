@@ -1,3 +1,5 @@
+#Create index.html from system var
+#test
 #body common control
 #{
 #	bundlesequence => { "html_page" };
@@ -12,11 +14,15 @@ bundle agent html_page
 		"$(html_page_url)"
 		perms => mog("644", "www", "server"),
 		create => "true",
-		edit_line => html_content;
+		edit_line => html_content,
+		edit_defaults => def;
 }
 
-bundle edit_line html_content
-{
+body edit_defaults def{
+	max_file_size => "1000000";
+}
+
+bundle edit_line html_content{
 	insert_lines:
 		"
 		<html>	

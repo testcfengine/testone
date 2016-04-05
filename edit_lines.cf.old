@@ -1,0 +1,106 @@
+body common control{
+	inputs => { "/var/cfengine/masterfiles/lib/3.7/stdlib.cf" };
+	bundlesequence => { "removeAllLines" };
+}
+
+#Edit existing lines
+bundle agent editExistLines{
+	files:
+		"/home/steph/testfile.txt"
+		create => "true",
+		edit_line => myedit("second");
+}
+
+bundle edit_line myedit(parameter){
+	vars:
+		"edit_variable" string => "Edit variable is $(parameter)";
+
+	replace_patterns:
+		"toto"
+		replace_with => With("tata");
+}
+
+body replace_with With(x){
+	replace_value => "$(x)";
+	occurrences => "all"; #first, all
+}
+
+body select_region MySection(x){
+      select_start => "\[$(x)\]";
+      select_end => "\[.*\]";
+
+}
+#Remove Existing lines
+bundle agent removeExistLines{
+	files:
+		"/home/steph/testfile.txt"
+		create => "true",
+		edit_line => remove;
+}
+
+bundle edit_line remove{
+	delete_lines:
+		"#toto" not_matching => "false";
+}
+
+#Add line if does not exist
+bundle agent insertLines{
+	vars:
+		"lineToInsert" string => "InsertedLine";
+	files:
+		"/home/steph/testfile.txt"
+		create => "true",
+		edit_line => insert("$(lineToInsert)");
+}
+
+bundle edit_line insert(var){
+	insert_lines:
+		"$(var)";
+}
+
+#Add line with location
+bundle agent insertLinesLocation{
+	vars:
+		"lineToInsertLocate" string => "InsertedLineAlways";
+	files:
+		"/home/steph/testfile.txt"
+		create => "true",
+		edit_line => insertAlwaysLoc("$(lineToInsertAlways)");	
+}
+
+bundle edit_line insertAlwaysLoc(var){
+	insert_lines:
+		"$(var)" location => myloc;
+}
+body location myloc{
+	select_line_matching => "kqk";
+	before_after => "after";
+}
+
+#Remove all lines
+bundle agent removeAllLines{
+	vars:
+		"filePath" string => "/home/steph/testfile.txt";
+	files:
+		"$(filePath)"
+		create => "true";
+	commands:
+		"/bin/echo"
+		args => "> /home/steph/tttt";
+}
+
+#Insert line in any case
+bundle agent insertLinesAnyCase{
+	vars:
+		"lineAlways" string => "InsertedAlways";
+
+	files:
+		"/home/steph/testfile.txt"
+		create => "true",
+		edit_line => insertAlways("$(lineAlways)");
+}
+
+bundle edit_line insertAlways(var){
+	insert_lines:
+		"$(var)";
+}

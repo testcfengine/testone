@@ -8,7 +8,7 @@ bundle agent condition{
 	vars:
 		"lastname" string => ifelse("toto", "toto1",
 					"tata", "tata1",
-					"unknow");
+					"unknown");
 
 	methods:
 		"condition" usebundle => confirmed("$(lastname)");

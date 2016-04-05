@@ -1,0 +1,16 @@
+#Associatif array
+body common control{
+	bundlesequence => { "array_test" };
+}
+
+bundle agent array_test{
+	vars:
+		"array_te" slist => {"toto", "tata" , "titi"};
+
+		"array[toto]" slist => {"toto1", "toto2", "toto3", "toto4"};
+		"array[tata]" slist => {"tata1", "tata2", "tata3", "tata4"};
+		"array[titi]" slist => {"titi1", "titi2", "titi3", "titi4"};
+
+	reports:
+		"$(array_te) = $(array[$(array_te)])";
+}
