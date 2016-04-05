@@ -1,9 +1,5 @@
 #Associatif array
-<<<<<<< HEAD
-#Test3 comment new branch
-=======
 #Test2 comment new branch
->>>>>>> comment
 body common control{
 	bundlesequence => { "array_test" };
 }
