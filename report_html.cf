@@ -34,7 +34,7 @@ bundle edit_line html_content{
 		OS : $(sys.os) </br>
 		Nom complet de l'os : $(sys.ostype) </br>
 		Uptime : $(sys.uptime) </br>  
-		Adresses IP :$(sys.ip_addresses)</br>
+		Adresses IP :$(sys.ipv4[eth0])</br>
 		Workdir : $(sys.workdir) </br>
 		Hote sys.host : $(sys.host) </br>
 		Nombre de cpu : $(sys.cpus) </br>

@@ -46,7 +46,12 @@ files:
                         "address_ip" : "$(sys.ipv4[eth0])",
                         "hostname" : "$(sys.fqhost)",
                         "filepath" : "$(x)",
-			"hosttype" : "$(y)"
+			"hosttype" : "$(y)",
+			"users" :
+				[
+					{"name" : "toto", "lastname" : "toto1"},
+					{"name" : "tata", "lastname" : "tata1"}
+				]
                 }
         ');
 }
