@@ -1,0 +1,30 @@
+#test3
+body common control
+{
+      bundlesequence => { run };
+}
+
+bundle agent run
+{
+ 	vars:
+		"findtmp" slist => findfiles("/tmp/**.txt","/tmp/**.tx");
+	files:
+		"$(findtmp)"
+		create => "false",
+		edit_line => myedit("toto","tata");
+	files:
+		"$(findtmp)"
+		create => "false",
+		edit_line => myedit("tutu","titi");	
+}
+
+bundle edit_line myedit(oldvalue,newvalue){
+	replace_patterns:
+		"$(oldvalue)"
+		replace_with => vars("$(newvalue)");
+}
+
+body replace_with vars(value){
+	replace_value => "$(value)";
+	occurrences => all;
+}

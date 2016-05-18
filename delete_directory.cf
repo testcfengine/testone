@@ -1,0 +1,22 @@
+#Delete Dir
+
+body common control{
+	inputs => { "/var/cfengine/masterfiles/lib/3.7/stdlib.cf" };
+	bundlesequence => { "cleanup"};
+}
+
+bundle agent cleanup{
+	files:
+		"/tmp/deletetest"
+		delete => tidy,
+		file_select => plain,
+		depth_search => recurse("inf");
+
+		"/tmp/deletetest"
+		delete => tidy,
+		file_select => dirs,
+		depth_search => recurse("inf");
+
+		"/tmp/deletetest"
+		delete => tidy;
+}

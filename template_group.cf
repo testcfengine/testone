@@ -20,15 +20,16 @@ bundle agent config_group{
 
 bundle agent config_hub{
         vars:
-		"var1" string => "/home/steph/hub.txt";
+		"var1" string => "/tmp/hub.txt";
 		"var2" string => "This host is the Policy server";
+
 	methods:
 		"filling_template" usebundle => template("$(var1)","$(var2)");
 }
 
 bundle agent config_host{
         vars:
-                "var1" string => "/home/steph/host.txt";
+                "var1" string => "/tmp/host_.txt";
                 "var2" string => "This host is a client";
 	methods:
 		"filling_template" usebundle => template("$(var1)","$(var2)");		
@@ -36,7 +37,7 @@ bundle agent config_host{
 
 bundle agent template(x,y){
 files:
-        "/home/steph/template.conf"
+        "/tmp/template.conf"
 	perms => mog ("644", "root", "root"),
 	create => "true",
         edit_template => "/var/cfengine/inputs/templates/template_file.conf",

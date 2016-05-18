@@ -1,7 +1,7 @@
 #test Edit Files
 body common control{
         inputs => { "/var/cfengine/masterfiles/lib/3.7/stdlib.cf" };
-        bundlesequence => { "editExistLines" };
+        bundlesequence => { "removeExistLines" };
 }
 
 #Edit existing lines

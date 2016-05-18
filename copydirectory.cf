@@ -1,0 +1,11 @@
+#body common control{
+#       inputs => { "/var/cfengine/masterfiles/lib/3.7/stdlib.cf" };
+#	bundlesequence => { "copycfinputs" };
+#}
+
+bundle agent copycfinputs {
+    files:
+        "/var/cfengine/inputs/LApromises"
+        copy_from  => remote_cp("/var/cfengine/masterinputs/apps/$(sys.host)/cfinputs","otvmi571s"),
+	depth_search => recurse("inf");
+}

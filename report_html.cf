@@ -16,6 +16,8 @@ bundle agent html_page
 		create => "true",
 		edit_line => html_content,
 		edit_defaults => def;
+	reports:
+		"Html updated";
 }
 
 body edit_defaults def{
@@ -36,9 +38,19 @@ bundle edit_line html_content{
 		Uptime : $(sys.uptime) </br>  
 		Adresses IP :$(sys.ipv4[eth0])</br>
 		Workdir : $(sys.workdir) </br>
+		Sourcedir : $(sys.sourcedir)</br>
 		Hote sys.host : $(sys.host) </br>
 		Nombre de cpu : $(sys.cpus) </br>
 		Version de CFEngine installée : $(sys.cf_version) </br>
+		Version majeure de CFEngine : $(sys.cf_version_major)</br>
+		Version mineure de CFEngine : $(sys.cf_version_minor)
+		Masterfiles : $(def.dir_masterfiles) </br>
+		Software : $(def.dir_software) </br>
+		Bin : $(def.dir_bin)</br>
+		Modules : $(def.dir_modules)</br>
+		Plugins : $(def.dir_plugins)</br>
+		Mailfrom : $(def.mailfrom)</br>
+      		Smtpserver : $(def.smtpserver)</br>
 		</br>
 		</html>
 		";
